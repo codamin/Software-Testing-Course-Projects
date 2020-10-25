@@ -15,7 +15,6 @@ import org.springframework.samples.petclinic.utility.SimpleDI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//"Mockisty" Style is used this test class
 public class PetServiceTest {
 	@Rule
 	public MockitoRule rule = MockitoJUnit.rule();
@@ -34,8 +33,6 @@ public class PetServiceTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test
 	public void FindOwner_CallsLoggerInfo() {
 		//exercise
@@ -44,8 +41,6 @@ public class PetServiceTest {
 		verify(loggerMock, times(1)).info(anyString(), anyInt());
 	}
 
-	//State Verification
-	//Test Stub
 	@Test void FindOwner_ReturnsCorrectOwner_IfOwnerIdIsValid() {
 		//stubbing
 		when(ownerMock.getId()).thenReturn(1);
@@ -57,8 +52,6 @@ public class PetServiceTest {
 		assertEquals(foundOwner.getId(), 1);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void FindOwner_CallOwnerFindById() {
 		//exersice
 		petService.findOwner(1);
@@ -66,8 +59,6 @@ public class PetServiceTest {
 		verify(ownerRepositoryMock, times(1)).findById(1);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test
 	public void NewPet_CallsLoggerInfo() {
 		//exercise
@@ -76,8 +67,6 @@ public class PetServiceTest {
 		verify(loggerMock, times(1)).info(anyString(), anyInt());
 	}
 
-	//State Verification
-	//Dummy Object
 	@Test
 	public void NewPet_ReturnsPet_IfOwnerIsGiven() {
 		//exercise
@@ -86,8 +75,6 @@ public class PetServiceTest {
 		assertNotNull(pet);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test
 	public void NewPet_CallsOwnerGetId_IfOwnerIsGiven() {
 		//exercise
@@ -96,8 +83,6 @@ public class PetServiceTest {
 		verify(ownerMock, times(1)).getId();
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test
 	public void NewPet_CallsOwnerAddPet_IfOwnerIsGiven() {
 		//exercise
@@ -106,8 +91,6 @@ public class PetServiceTest {
 		verify(ownerMock, times(1)).addPet(any(Pet.class));
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void FindPet_CallsLoggerInfo() {
 		//exercise
 		petService.findPet(1);
@@ -115,8 +98,6 @@ public class PetServiceTest {
 		verify(loggerMock, times(1)).info(anyString(), anyInt());
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void FindPet_CallsPetTimedCacheGetWithGivenId_IfIdIsGiven() {
 		//exercise
 		petService.findPet(1);
@@ -124,8 +105,6 @@ public class PetServiceTest {
 		verify(petTimedCacheMock, times(1)).get(1);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void SavePet_CallsLoggerInfo() {
 		//exercise
 		petService.savePet(petMock, ownerMock);
@@ -133,8 +112,6 @@ public class PetServiceTest {
 		verify(loggerMock, times(1)).info(anyString(), anyInt());
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void SavePet_CallsOwnerAddPetWithGivenPet_IfPetAndOwnerAreGiven() {
 		//exercise
 		petService.savePet(petMock, ownerMock);
@@ -142,8 +119,6 @@ public class PetServiceTest {
 		verify(ownerMock, times(1)).addPet(petMock);
 	}
 
-	//Behavioural Verification
-	//Mock
 	@Test void SavePet_CallsPetTimedCacheSaveWithGivenPet_IfPetAndOwnerAreGiven() {
 		//exercise
 		petService.savePet(petMock, ownerMock);
