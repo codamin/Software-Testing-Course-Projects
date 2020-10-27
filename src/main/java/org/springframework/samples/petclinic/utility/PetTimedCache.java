@@ -97,3 +97,9 @@ public class PetTimedCache {
 		}
 	}
 }
+
+//********************************* Assignment 2 - Problem 2 part 2 answer *********************************************
+
+//1. Because this class is using thread behaviour of the class methods are complex and not highly controlled so we must
+	//test the behaviour of this class and thus we should use mocks in mockisty method.
+//2. We prefer to use mock objects for each related class to have the complete isolation. So we use mockisy style.
