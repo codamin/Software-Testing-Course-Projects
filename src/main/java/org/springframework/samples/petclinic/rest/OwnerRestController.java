@@ -108,12 +108,14 @@ public class OwnerRestController {
 		BindingErrorsResponse errors = new BindingErrorsResponse();
 		HttpHeaders headers = new HttpHeaders();
 		if (bindingResult.hasErrors() || (owner == null)) {
+			System.out.printf("br1");
 			errors.addAllErrors(bindingResult);
 			headers.add("errors", errors.toJSON());
 			return new ResponseEntity<Owner>(headers, HttpStatus.BAD_REQUEST);
 		}
 		Owner currentOwner = this.clinicService.findOwnerById(ownerId);
 		if (currentOwner == null) {
+			System.out.printf("br2");
 			return new ResponseEntity<Owner>(HttpStatus.NOT_FOUND);
 		}
 		currentOwner.setAddress(owner.getAddress());
@@ -122,6 +124,7 @@ public class OwnerRestController {
 		currentOwner.setLastName(owner.getLastName());
 		currentOwner.setTelephone(owner.getTelephone());
 		this.clinicService.saveOwner(currentOwner);
+		System.out.printf("br3");
 		return new ResponseEntity<Owner>(currentOwner, HttpStatus.NO_CONTENT);
 	}
 
