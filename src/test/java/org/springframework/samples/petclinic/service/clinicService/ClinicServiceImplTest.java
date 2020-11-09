@@ -43,7 +43,7 @@ public class ClinicServiceImplTest {
 	private ClinicServiceImpl clinicServiceimpl;
 
 	@Test
-	public void visitOwnerPetsDoesNotEnterLoopLastIfTrue() {
+	public void visitOwnerPetsDoesNotEnterLoopThrowException() {
 		/* stubbing */
 		Pet petMock = mock(Pet.class);
 		Owner ownerMock = mock(Owner.class);
@@ -53,13 +53,11 @@ public class ClinicServiceImplTest {
 		/* verify*/
 		try {
 			clinicServiceimpl.visitOwnerPets(ownerMock);
-		} catch (Exception e) {
-			System.out.println("hi");
-		}
+		} catch (Exception e) {}
 	}
 
 	@Test
-	public void visitOwnerPetsDoesNotEnterLoopThrowException() {
+	public void visitOwnerPetsDoesNotEnterLoopDoesNotThrowException() {
 		/* stubbing */
 		Owner ownerMock = mock(Owner.class);
 
@@ -103,9 +101,11 @@ public class ClinicServiceImplTest {
 		/* stubbing */
 		Owner ownerMock = mock(Owner.class);
 
-		Pet petMock = mock(Pet.class); //age > 3
+		Pet petMock = mock(Pet.class);
+		//age > 3
 		when(petMock.getBirthDate()).thenReturn(new Date(100,1,1));
-		Visit visitMock = mock(Visit.class); //days > 364
+		Visit visitMock = mock(Visit.class);
+		//days > 364
 		when(visitMock.getDate()).thenReturn(new Date(115,1,1));
 		when(petMock.getLastVisit()).thenReturn(Optional.ofNullable(visitMock));
 		Collection<Pet> emptyPets = new ArrayList<Pet>();
@@ -127,8 +127,10 @@ public class ClinicServiceImplTest {
 		Owner ownerMock = mock(Owner.class);
 
 		Pet petMock = mock(Pet.class);
+		//age < 3
 		when(petMock.getBirthDate()).thenReturn(new Date(120,1,1)); //0
 		Visit visitMock = mock(Visit.class);
+		//days > 364
 		when(visitMock.getDate()).thenReturn(new Date(100,1,1)); //7
 		when(petMock.getLastVisit()).thenReturn(Optional.ofNullable(visitMock));
 		Collection<Pet> emptyPets = new ArrayList<Pet>();
@@ -145,15 +147,18 @@ public class ClinicServiceImplTest {
 	}
 
 	@Test
-	public void visitOwnerPetsSecondIfFalse2() {
+	public void visitOwnerPetsSecondIfFalse() {
 		/* stubbing */
 		Owner ownerMock = mock(Owner.class);
 
+		//age > 3
 		Pet petMock = mock(Pet.class);
 		when(petMock.getBirthDate()).thenReturn(new Date(100,1,1));
+		//days = 282
 		Visit visitMock = mock(Visit.class);
 		when(visitMock.getDate()).thenReturn(new Date(120,1,1));
 		when(petMock.getLastVisit()).thenReturn(Optional.ofNullable(visitMock));
+
 		Collection<Pet> emptyPets = new ArrayList<Pet>();
 		emptyPets.add(petMock);
 

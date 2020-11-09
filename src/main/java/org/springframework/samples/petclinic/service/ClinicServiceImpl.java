@@ -225,10 +225,7 @@ public class ClinicServiceImpl implements ClinicService {
             if (last.isPresent()) {
                 int age = Years.yearsBetween(new DateTime(pet.getBirthDate()), today).getYears();
                 int daysFromLastVisit = Days.daysBetween(new DateTime(last.get().getDate()), today).getDays();
-				System.out.println(daysFromLastVisit);
-				System.out.println(age);
 				if ((age > 3 && daysFromLastVisit > 364) || (age <= 3 && daysFromLastVisit > 182)) {
-					System.out.println("it was ok");
                     visitPetIfPossible(vets, notVisited, pet);
                 }
             } else {
