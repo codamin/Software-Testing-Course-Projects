@@ -1,0 +1,15 @@
+image: maven:3.6.3
+
+stages:
+  - Build
+  - Test
+
+compile:
+  stage: Build
+  script:
+    - mvn surefire:test --file pom.xml
+
+unit_test:
+  stage: Test
+  script:
+    - mvn surefire:test --file pom.xml
