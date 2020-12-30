@@ -7,7 +7,7 @@ stages:
 compile:
   stage: Build
   script:
-    - mvn surefire:test --file pom.xml
+    - mvn compiler:compile
 
 unit_test:
   stage: Test
